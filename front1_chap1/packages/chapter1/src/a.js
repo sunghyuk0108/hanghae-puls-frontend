@@ -25,9 +25,7 @@ function Worker(health) {
 function JuniorEngineer(health, intelligence) {
   this._super(health);
   this._intelligence = intelligence ?? 1;
-  if (this._intelligence > 10) {
-    this._isBornGenius = true;
-  }
+  this._isBornGenius = this._intelligence > 10;
 }
 //- 생성자 함수는 수정하지 마세요
 
@@ -44,6 +42,9 @@ Worker.prototype.work = function () {
 
 // JuniorEngineer 생성자 함수에 Worker.prototype 상속 (프로토타입 체인 설정)
 JuniorEngineer.prototype = Object.create(Worker.prototype);
+
+// JuniorEngineer의 생성자를 JUniorEngineer를 바라보게함.
+JuniorEngineer.prototype.constructor = JuniorEngineer;
 
 // JuniorEngineer 생성자 함수에 _super 함수 생성.
 JuniorEngineer.prototype._super = function (health) {
@@ -67,13 +68,6 @@ JuniorEngineer.prototype.work = function () {
 JuniorEngineer.prototype.isBornGenius = function () {
   return this._isBornGenius ?? false;
 };
-
-console.log(
-  JuniorEngineer.prototype instanceof JuniorEngineer,
-  "instanceof JuniorEngineer 확인",
-  JuniorEngineer.prototype instanceof Object,
-  "instanceof Object 확인"
-);
 
 //- 여기에 코드를 작성하세요
 
@@ -100,17 +94,17 @@ console.log(
  * - V8 엔진의 히든클래스 개념을 이해하고 이 개념을 응용하여 최적화 해보세요.
  * - ES 모듈시스템으로 바꾼뒤, 확장자를 .mjs로 변경한 뒤 실행해보세요. 최적화 결과가 같을까요?
  */
-// function main() {
-//   var startTime = performance.now();
-//   for (var i = 0; i < 10000000; i++) {
-//     new JuniorEngineer(10, Math.floor(Math.random() * 20)).isBornGenius();
-//   }
-//   var endTime = performance.now();
+function main() {
+  var startTime = performance.now();
+  for (var i = 0; i < 10000000; i++) {
+    new JuniorEngineer(10, Math.floor(Math.random() * 20)).isBornGenius();
+  }
+  var endTime = performance.now();
 
-//   console.log(endTime - startTime);
-// }
+  console.log(endTime - startTime);
+}
 
-// main();
+main();
 
 module.exports = {
   Worker,

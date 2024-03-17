@@ -8,6 +8,8 @@ describe("챕터 1 :: 문제 A", () => {
       worker.work();
     }
 
+    console.log(worker.constructor, "worker의 constructor 확인");
+
     expect(worker.getHealth()).toBe(0);
   });
 
@@ -17,6 +19,11 @@ describe("챕터 1 :: 문제 A", () => {
     for (let i = 0; i < 5; i++) {
       juniorEngineer.work();
     }
+
+    console.log(
+      juniorEngineer.constructor,
+      "juniorEngineer의 constructor 확인"
+    );
 
     expect(juniorEngineer.getHealth()).toBe(5);
     expect(juniorEngineer.getIntelligence()).toBe(10);
