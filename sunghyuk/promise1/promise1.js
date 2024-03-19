@@ -38,7 +38,11 @@ function job2() {
           // 2초 뒤 작업할 코드...
           companyRoll[index] = { ...companyRoll[index], isMove: true };
           console.log("시간 별 실행할 코드를 주입");
-          innerResolve();
+          innerResolve(
+            `job2 작업이 완료되기까지 소요된 시간은 ${time} 이며 ${
+              index + 1
+            } 번째 타이머가 완료되었습니다.`
+          );
         }, time);
         timeOutList.push(timer);
       });
@@ -47,9 +51,18 @@ function job2() {
     console.log(promises, "promises 배열 확인");
 
     // Promise.all() 내부에 배열을 아규먼트로 넣어야함.
-    Promise.all(promises).then(() => {
+    // promise.all은 모든 작업이 완료되고 그 다음 후속 작업을 처리할 때 쓴다고 생각하면됨.
+    Promise.all(promises).then((result) => {
+      console.log("promiseAll: ", result);
       resolve("job2 성공적으로 마침");
     });
+
+    // race는 같은 작업하는 Promise를 모아서 가장 빨리 끝나는 값 받아서 그 다음 후속 작업을 처리할 때 쓴다고 생각하면됨.
+    // result는 promises에서 제일 빨리 작업이 완료된 innerRsolve의 값을 전달 받게됨.
+    // Promise.race(promises).then((result) => {
+    //   console.log("promiseRace: ", result);
+    //   resolve("job2 성공적으로 마침");
+    // });
   });
 }
 // then내부 then을 사용하는 네이스팅 방식
