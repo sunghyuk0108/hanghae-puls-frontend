@@ -69,7 +69,7 @@ class HardWork {
   }
 
   _initTasks() {
-    const count = 3000;
+    const count = 30000;
     const tasks = new Array(count);
 
     for (let i = 0; i < count; i++) {
