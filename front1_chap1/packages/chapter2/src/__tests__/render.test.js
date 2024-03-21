@@ -6,8 +6,6 @@ describe("render > ", () => {
     test("한 개의 태그를 렌더링할 수 있다.", () => {
       const App = jsx("div", null, "div의 children 입니다.");
 
-      console.log(App, "app 확인");
-
       const $root = document.createElement("div");
       render($root, App);
 
@@ -109,7 +107,7 @@ describe("render > ", () => {
         $root,
         jsx(
           "div",
-          null,
+          {},
           jsx("p", null, "첫 번째 문단"),
           jsx("p", null, "두 번째 문단")
         ),
